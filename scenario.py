@@ -2,7 +2,7 @@
 
 from file_io import read
 import preprocessing.scenario
-import settings
+from settings import DIMENSION, WINDOW, MIN_COUNT, WORKERS, EPOCH, SG
 
 from os.path import join, dirname
 from glob import glob
@@ -19,11 +19,12 @@ def train():
 
     model = word2vec.Word2Vec(
         sentences=sentences,
-        size=settings.DIMENSION,
-        window=settings.WINDOW,
-        min_count=settings.MIN_COUNT,
-        workers=settings.WORKERS,
-        iter=settings.EPOCH,
+        size=DIMENSION,
+        window=WINDOW,
+        min_count=MIN_COUNT,
+        workers=WORKERS,
+        iter=EPOCH,
+        sg=SG,
     )
     model.save(join(dirname(__file__), f'storage/model/{args.model_name}.model'))
 
