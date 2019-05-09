@@ -14,7 +14,8 @@ def run(sentences: List[str]) -> List[List[str]]:
     logger.info('start: preprocessing')
 
     logger.info('start: clean number')
-    sentences = list(map(clean_number, sentences))
+    with Pool(cpu_count()) as p:
+        sentences = p.map(clean_number, sentences)
     logger.info('end: clean number')
 
     logger.info('start: validate clean sentence')
@@ -22,7 +23,8 @@ def run(sentences: List[str]) -> List[List[str]]:
     logger.info('end: validate clean sentence')
 
     logger.info('start: clean in parentheses')
-    sentences = list(map(clean_in_parentheses, sentences))
+    with Pool(cpu_count()) as p:
+        sentences = p.map(clean_in_parentheses, sentences)
     logger.info('end: clean in parentheses')
 
     logger.info('start: wakati')
